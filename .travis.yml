@@ -24,6 +24,6 @@ script:
   - docker build -t $DOCKER_REPO:$ARCH-latest --build-arg ARCHREPO="$ARCHREPO" --build-arg QEMU_ARCH="$QEMU_ARCH"  ./
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin harbor.dispatch.sh
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push $DOCKER_REPO:$ARCH-latest ; fi
   
