@@ -10,10 +10,13 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         libmagickwand-dev \
         imagemagick \
+        graphicsmagick \
+        libgraphicsmagick1-dev \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
-    && pecl install imagick && docker-php-ext-enable imagick
+    && pecl install imagick && docker-php-ext-enable imagick \
+    && pecl install gmagick-2.0.5RC1 && docker-php-ext-enable gmagick
 
 
 COPY ./photon /var/www/photon/
